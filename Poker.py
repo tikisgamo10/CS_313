@@ -1,3 +1,14 @@
+# File: Poker.py
+#Description: Simulates a game of poker
+#Student's Name: Luis Jimenez
+#Student's UT EID: laj987
+#Partner's Name: N/A
+#Partner's UT EID: N/A
+#Course Name: CS 313E
+#Unique Number: 51335
+#Date Created: February 9th 3:13PM
+#Date Last Modified: February 10th 2:36PM
+
 import random
 
 class Card (object):
@@ -167,13 +178,14 @@ class Poker (object):
         if(not is_tie):
             print('Player ' + str(points_hand.index(max_hand) + 1) + ' wins')
         else:
-            #Tie breaker are non-zero ONLY for those hands that are the highest, i.e, the ties
+            #Tie breaker should be non-zero ONLY for those hands that are the highest, i.e, the ties
             for i in range(len(points_hand)):
                 if(points_hand[i] == max_hand):
                     pass
                 else:
                     tie_breaker[i] = 0
 
+            #Will keep printing the tied players
             still_tied = True
             while(still_tied):
                 index_of_next_highest = tie_breaker.index(max(tie_breaker))
