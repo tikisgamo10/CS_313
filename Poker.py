@@ -71,20 +71,11 @@ class Poker (object):
         self.players = []
         numcards_in_hand = 5
 
-        hand = []
-        hand.append(Card(2, 'S'))
-        hand.append(Card(4, 'S'))
-        hand.append(Card(3, 'C'))
-        hand.append(Card(7, 'S'))
-        hand.append(Card(6, 'D'))
-        self.players.append (hand)
-        hand = []
-        hand.append(Card(3, 'S'))
-        hand.append(Card(8, 'D'))
-        hand.append(Card(4, 'C'))
-        hand.append(Card(5, 'D'))
-        hand.append(Card(2, 'D'))
-        self.players.append (hand)
+        for i in range (num_players):
+            hand = []
+            for j in range (numcards_in_hand):
+                hand.append (self.deck.deal())
+            self.players.append (hand)
 
 
 
