@@ -187,11 +187,21 @@ class Poker (object):
 
             #Will keep printing the tied players
             still_tied = True
+            printed_winner = False
             while(still_tied):
                 index_of_next_highest = tie_breaker.index(max(tie_breaker))
-                print('Player ' + str(index_of_next_highest + 1) + ' ties')
+
+                #If winner has not been printed, print it, the rest are ties in descending order
+                if( not printed_winner):
+                    print('Player ' + str(index_of_next_highest + 1) + ' wins')
+                    printed_winner = True
+                else:
+                    print('Player ' + str(index_of_next_highest + 1) + ' ties')
+
+
                 #Record already printed so we can set equal to zero so that max function gets next biggest one
                 tie_breaker[index_of_next_highest] = 0
+
 
                 #Check if there are no more non-zero values
                 if(tie_breaker.count(0) == len(tie_breaker)):
