@@ -45,18 +45,46 @@ def greedy_helper(grid, i, j, sum):
 
 # returns the greatest path sum using divide and conquer (recursive) approach
 def rec_search (grid):
-    return
+    return rec_search_helper(grid, 0, 0)
 
 def rec_search_helper(grid, i, j):
     if(i < len(grid) - 1):
-        sum_1 = rec_search_helper(grid, i+1, j)
-        sum_2 = rec_search_helper(grid, i+1, j+1)
+        sum_1 = int(rec_search_helper(grid, i+1, j))
+        sum_2 = int(rec_search_helper(grid, i+1, j+1))
+
+        #return the greater of the two sums plus yourself
+        if(sum_1 > sum_2):
+            return sum_1 + int(grid[i][j])
+        else:
+            return sum_2 + int(grid[i][j])
     else:
-        return grid[i]
+        return int(grid[i][j])
 
 # returns the greatest path sum and the new grid using dynamic programming
 def dynamic_prog (grid):
-    return
+    num_rows = len(grid)
+    new_grid = grid
+    return dynamic_prog_helper(new_grid, num_rows - 2)
+
+def dynamic_prog_helper(grid, i):
+    if(i >= 0):
+
+        for j in range(i+1):
+            sum_1 = int(grid[i+1][j])
+            sum_2 = int(grid[i+1][j+1])
+            if(sum_1 > sum_2):
+                grid[i][j] = sum_1 + int(grid[i][j])
+            else:
+                grid[i][j] = sum_2 + int(grid[i][j])
+
+        return dynamic_prog_helper(grid, i-1)
+
+    else:
+
+        tuple = grid[0][0], grid
+        return tuple
+
+
 
 # reads the file and returns a 2-D list that represents the triangle
 def read_file ():
@@ -97,17 +125,20 @@ def main ():
     # print time taken using greedy approach
     print("The time taken for greedy search is", del_t, "seconds.")
 
-    # ti = time.time()
-    # # output greates path from divide-and-conquer approach
-    # tf = time.time()
-    # del_t = tf - ti
-    # # print time taken using divide-and-conquer approach
-    #
-    # ti = time.time()
-    # # output greates path from dynamic programming
-    # tf = time.time()
-    # del_t = tf - ti
-    # # print time taken using dynamic programming
+    ti = time.time()
+    divide_and_conquer_sum = rec_search(grid)
+    print ("The greatest path sum through divide-and-conquer search is", divide_and_conquer_sum)
+    tf = time.time()
+    del_t = tf - ti
+    # print time taken using divide-and-conquer approach
+    print("The time taken for divide-and-conquer search is", del_t, "seconds.")
+
+    ti = time.time()
+    dynamic_programmin_sum = dynamic_prog(grid)[0]
+    print ("The greatest path sum through dynamic programming search is", dynamic_programmin_sum)
+    tf = time.time()
+    del_t = tf - ti
+    print("The time taken for dynamic programming search is", del_t, "seconds.")
 
 
 if __name__ == "__main__":
